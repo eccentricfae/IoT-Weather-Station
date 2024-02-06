@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Station | Device Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #7d34b2;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        header > * {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        @media screen and (min-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        .header-button {
+            background-color: #fff;
+            color: #7d34b2;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 20px;
+            text-decoration:none;
+        }
+
+        .header-button:hover {
+            box-shadow: 0px 0px 20px yellow;
+        }
+
+        #body_title > h1{
+            text-align: center;
+            margin: auto;
+            background-color: white;
+            color: #7d34b2;
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #7d34b2;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        .hide_at_start {
+            display: none;
+        }
+
+        .accordion_button {
+            width: 100%;
+            color: #7d34b2;
+            background-color: white;
+            background-image: linear-gradient(to right, #b57edc, white, #b57edc);
+            border: 3px solid #7d34b2;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: large;
+            font-weight: bold;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .accordion_button:hover {
+            background-image: linear-gradient(to right, #9967bd, rgb(217, 217, 217), #9967bd);
+        }
+
+        .accordion_container {
+            width: 97%;
+            background-color: white;
+            border-top: 1px solid #dcbaf5;
+            border-right: 3px solid #7d34b2;
+            border-left: 3px solid #7d34b2;
+            border-bottom: 3px solid #7d34b2;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            margin: auto;
+        }
+
+
+
+        .setting_element {
+            /* Placeholder class - DO NOT DELETE! */
+        }
+
+        .setting_element_div {
+            display: flex;
+            flex-direction: column;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .setting_element_div > hr {
+            width: 97%;
+            border: 1px solid #b57edc;
+        }
+
+        .setting_element_div > p {
+            margin: 0;
+            margin-top: 5px;
+            padding: 0;
+            font-size: small;
+        }
+
+        .setting_element_div > .sed2 {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .setting_element_div > .sed2 > *{
+            width: 50%;
+        }
+
+        .setting_element_div > .sed2 > input, select {
+            border: 1px solid #b57edc;
+            border-radius: 10px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .setting_element_div > input:focus {
+            outline: none !important;
+        }
+
+        #app_title {
+            text-align: center;
+            color: #7d34b2;
+            text-shadow: 0px 0px 5px black;
+            margin: auto;
+            border: 3px solid #7d34b2;
+            border-radius: 20px;
+            padding: 10px;
+            width: 75%;
+            background-color: white;
+        }
+
+        #list_of_accordions {
+            text-align: center;
+        }
+
+        #save_button {
+            margin-top: 20px;
+            border: 3px solid #7d34b2;
+            color: #7d34b2;
+            border-radius: 10px;
+            font-size: large;
+            font-weight: bold;
+            padding: 10px;
+            background-image: linear-gradient(to right, #b57edc, 10%, white, 90%, #b57edc);
+        }
+
+        #save_button:hover {
+            background-image: linear-gradient(to right, #9967bd, 10%, rgb(217, 217, 217), 90%, #9967bd);
+        }
+
+        #instructions > p {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        #error_alert {
+            display: none;
+            border: 3px solid red;
+            border-radius: 20px;
+            background-color: lightcoral;
+            margin: auto;
+            margin-top: 20px;
+            width: 350px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-buttons">
+            <a class="header-button" href='./'>Home</a>
+            <a class="header-button" href='./device_info'>Device Info</a>
+            <a class="header-button" href='./settings'>Settings</a>
+        </div>
+    </header>
+
+    <section>
+        <div id="body_title">
+            <h1>Weather Station's Settings</h1>
+        </div>
+
+        <div id="list_of_accordions">
+            <button type="button" id="basic_settings_button" onclick="accordion_toggle1()" class="accordion_button">BASIC SETTINGS ▼</button>
+            <div id="basic_settings" class="hide_at_start accordion_container">
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>WiFi SSID</p>
+                        <input type="text" id="wifi_name" class="setting_element">
+                    </div>
+                    <p class="tooltip">The name of the WiFi network that the device should connect to</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>WiFi Password</p>
+                        <input type="text" id="wifi_password" class="setting_element">
+                    </div>
+                    <p class="tooltip">The password to the WiFi network that the device should connect to</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>TimeZone</p>
+                        <select id="tz_code" name="tz_code" class="setting_element">
+                            <option value="GMT+12">GMT -12:00</option>
+                            <option value="GMT+11">GMT -11:00</option>
+                            <option value="GMT+10">GMT -10:00</option>
+                            <option value="GMT+09">GMT -9:00</option>
+                            <option value="GMT+08">GMT -8:00</option>
+                            <option value="GMT+07">GMT -7:00</option>
+                            <option value="GMT+06">GMT -6:00</option>
+                            <option value="GMT+05">GMT -5:00</option>
+                            <option value="GMT+04">GMT -4:00</option>
+                            <option value="GMT+03">GMT -3:00</option>
+                            <option value="GMT+02">GMT -2:00</option>
+                            <option value="GMT+01">GMT -1:00</option>
+                            <option value="GMT" selected="selected">GMT</option>
+                            <option value="GMT-01">GMT +1:00</option>
+                            <option value="GMT-02">GMT +2:00</option>
+                            <option value="GMT-03">GMT +3:00</option>
+                            <option value="GMT-04">GMT +4:00</option>
+                            <option value="GMT-05">GMT +5:00</option>
+                            <option value="GMT-06">GMT +6:00</option>
+                            <option value="GMT-07">GMT +7:00</option>
+                            <option value="GMT-08">GMT +8:00</option>
+                            <option value="GMT-09">GMT +9:00</option>
+                            <option value="GMT-10">GMT +10:00</option>
+                            <option value="GMT-11">GMT +11:00</option>
+                            <option value="GMT-12">GMT +12:00</option>
+                            <option value="GMT-13">GMT +13:00</option>
+                            <option value="GMT-14">GMT +14:00</option>
+                        </select>
+                    </div>
+                    <p class="tooltip">The timezone in which the device will be working - used for automatic date and time synchronization</p>
+                    <hr>
+                </div>
+                
+            </div>
+    
+            <button type="button" id="advanced_settings_button" onclick="accordion_toggle2()" class="accordion_button">ADVANCED SETTINGS ▼</button>
+            <div id="advanced_settings" class="hide_at_start accordion_container">
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>mDNS Hostname</p>
+                        <input type="text" value="weatherstation" id="mdns_hostname" class="setting_element">
+                    </div>
+                    <p class="tooltip">The name that the device should be known as on the local network. If set to e.g. "esp" the device can be accessed as "esp.local" in the browser</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>Serial Logging Verbosity</p>
+                        <select id="serial_logging_verbosity" name="serial_logging_verbosity" class="setting_element">
+                            <option value="0">None</option>
+                            <option value="1">Error</option>
+                            <option value="2">Warning</option>
+                            <option value="3">Info</option>
+                            <option value="4" selected="selected">Debug</option>
+                            <option value="5">Verbose</option>
+                        </select>
+                    </div>
+                    <p class="tooltip">The verbosity of the logging the device will do on the serial connection to the PC</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>WiFi RSSI test period</p>
+                        <input type="number" value="60000" min="10" max="3600000" id="wifi_rssi_test_period_ms" class="setting_element">
+                    </div>
+                    <p class="tooltip">The period (in milliseconds) of testing the strength of the device's WiFi connection</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>Data acquisition period</p>
+                        <input type="number" value="1000" min="5" max="3600000" id="i2c_devices_daq_interval_ms" class="setting_element">
+                    </div>
+                    <p class="tooltip">The period (in milliseconds) of getting the data from the device's sensors</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>Device's temperature sensor select</p>
+                        <select id="i2c_devices_daq_temp_sensor_select" name="i2c_devices_daq_temp_sensor_select" class="setting_element">
+                            <option value="0">AM2320</option>
+                            <option value="1">BMP280</option>
+                            <option value="2" selected="selected">Average of the two</option>
+                        </select>
+                    </div>
+                    <p class="tooltip">Which sensor should the device use for temperature measurment</p>
+                    <hr>
+                </div>
+                <div class="setting_element_div">
+                    <div class="sed2">
+                        <p>Data Write Interval</p>
+                        <input type="number" value="60" min="1" max="3600000" id="data_write_to_sdcard_interval" class="setting_element">
+                    </div>
+                    <p class="tooltip">Interval in seconds between each write of data to the file</p>
+                    <hr>
+                </div>
+            </div>
+            
+            <div id="error_alert">
+                <h3>Failed to update the settings!</h3>
+            </div>
+
+            <button id="save_button" onclick="save_settings()">Save Settings</button>
+        </div>
+    </section>
+
+    <script>
+        var accordion_containers = document.getElementsByClassName("accordion_container");
+        for (var i = 0; i < accordion_containers.length; i++) {
+            accordion_containers[i].style.display = "none";
+        }
+
+        function accordion_toggle1() {
+            accordion_toggle('basic_settings');
+        }
+
+        function accordion_toggle2() {
+            accordion_toggle('advanced_settings');
+        }
+
+
+        function accordion_toggle(id) {
+            var button = document.getElementById(id + "_button");
+            var div = document.getElementById(id);
+            if (!div) {
+                return;
+            }
+
+            if (div.style.display === "none") {
+                div.style.display = "block";
+                button.innerHTML = button.innerHTML.slice(0, -1) + "▲";
+            } else {
+                div.style.display = "none";
+                button.innerHTML = button.innerHTML.slice(0, -1) + "▼";
+            }
+        }
+
+        function save_settings() {
+            var setting_elements = document.getElementsByClassName("setting_element");
+            
+            var settings_json = {};
+
+            for (var i = 0; i < setting_elements.length; i++) {
+                var name = setting_elements[i].id;
+                var value = setting_elements[i].value;
+
+                if (isNaN(value)) {
+                    settings_json[name] = value;
+                } else {
+                    settings_json[name] = Number(value);
+                }
+            }
+
+            let restart = confirm("Setting new settings requires the device to be restarted. Do You wish to proceed?");
+
+            fetch(
+                window.location.href, 
+                {
+                    method: "POST",
+                    body: JSON.stringify(settings_json),
+                    headers: {
+                        "Restart-Requested": restart.toString()
+                    },
+                }
+            )
+            .then((response) => {
+                if (response.status === 200) {
+                    location.reload();
+                } else {
+                    document.getElementById("error_alert").style.display = "block";
+                }
+            });
+        }
+    </script>
+    <script>
+        

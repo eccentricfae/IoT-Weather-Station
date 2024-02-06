@@ -1,0 +1,30 @@
+{
+  "name": "weather-station-config-app",
+  "version": "1.0.0",
+  "description": "Config App for Weather Station IoT college project",
+  "main": "app_start.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "Adrian \"eccentricfae\" Żaba",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
+    "electron": "^28.0.0"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "fs-jetpack": "^5.1.0"
+  }
+}

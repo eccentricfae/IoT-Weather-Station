@@ -1,0 +1,120 @@
+* {
+    outline: none !important;
+}
+
+.hide_at_start {
+    display: none;
+}
+
+.accordion_button {
+    width: 100%;
+    color: #7d34b2;
+    background-color: white;
+    background-image: linear-gradient(to right, #b57edc, white, #b57edc);
+    border: 3px solid #7d34b2;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: large;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.accordion_button:hover {
+    background-image: linear-gradient(to right, #9967bd, rgb(217, 217, 217), #9967bd);
+}
+
+.accordion_container {
+    width: 97%;
+    background-color: white;
+    border-top: 1px solid #dcbaf5;
+    border-right: 3px solid #7d34b2;
+    border-left: 3px solid #7d34b2;
+    border-bottom: 3px solid #7d34b2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: auto;
+}
+
+
+
+.setting_element {
+    /* Placeholder class - DO NOT DELETE! */
+}
+
+.setting_element_div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.setting_element_div > hr {
+    width: 97%;
+    border: 1px solid #b57edc;
+}
+
+.setting_element_div > p {
+    margin: 0;
+    margin-top: 5px;
+    padding: 0;
+    font-size: small;
+}
+
+.setting_element_div > .sed2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.setting_element_div > .sed2 > *{
+    width: 50%;
+}
+
+.setting_element_div > .sed2 > input, select {
+    border: 1px solid #b57edc;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+.setting_element_div > input:focus {
+    outline: none !important;
+}
+
+#app_title {
+    text-align: center;
+    color: #7d34b2;
+    text-shadow: 0px 0px 5px black;
+    margin: auto;
+    border: 3px solid #7d34b2;
+    border-radius: 20px;
+    padding: 10px;
+    width: 75%;
+    background-color: white;
+}
+
+#list_of_accordions {
+    text-align: center;
+}
+
+#save_button {
+    margin-top: 20px;
+    border: 3px solid #7d34b2;
+    color: #7d34b2;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: bold;
+    padding: 10px;
+    background-image: linear-gradient(to right, #b57edc, 10%, white, 90%, #b57edc);
+}
+
+#save_button:hover {
+    background-image: linear-gradient(to right, #9967bd, 10%, rgb(217, 217, 217), 90%, #9967bd);
+}
+
+#instructions > p {
+    margin-left: 10px;
+    margin-right: 10px;
+}

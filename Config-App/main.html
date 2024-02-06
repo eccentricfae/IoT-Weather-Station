@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Weather Station Config App</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <h1 id="app_title">WEATHER STATION SETTINGS CREATOR</h1>
+
+    <div id="list_of_accordions">
+        <button id="instructions_button" onclick="accordion_toggle('instructions')" class="accordion_button">INSTRUCTIONS ▼</button>
+        <div id="instructions" class="hide_at_start accordion_container">
+            <p>Hi! This is an app for creating the settings file for your own <i>Weather Station</i> device!</p>
+            <p>You should go through and set each setting in the <i>Basic Settings</i> portion, and if you are feeling adventurous you can also set the settings in the <i>Advanced Settings</i> portion.</p>
+            <p>After you set all the necessary settings please click the <i>Create Settings File</i> button. It'll ask you where to save the settings file (it'll be named <i>settings.txt</i>).</p>
+            <p>Lastly you need to move the new file with the settings to the SD card that you will insert into your device.</p>
+            <p>If you got here then you're good to enjoy using your <i>Weather Station</i> device!</p>
+        </div>
+
+        <button id="basic_settings_button" onclick="accordion_toggle('basic_settings')" class="accordion_button">BASIC SETTINGS ▼</button>
+        <div id="basic_settings" class="hide_at_start accordion_container">
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>WiFi SSID</p>
+                    <input type="text" id="wifi_name" class="setting_element">
+                </div>
+                <p class="tooltip">The name of the WiFi network that the device should connect to</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>WiFi Password</p>
+                    <input type="text" id="wifi_password" class="setting_element">
+                </div>
+                <p class="tooltip">The password to the WiFi network that the device should connect to</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>TimeZone</p>
+                    <select id="tz_code" name="tz_code" class="setting_element">
+                        <option value="GMT+12">GMT -12:00</option>
+                            <option value="GMT+11">GMT -11:00</option>
+                            <option value="GMT+10">GMT -10:00</option>
+                            <option value="GMT+09">GMT -9:00</option>
+                            <option value="GMT+08">GMT -8:00</option>
+                            <option value="GMT+07">GMT -7:00</option>
+                            <option value="GMT+06">GMT -6:00</option>
+                            <option value="GMT+05">GMT -5:00</option>
+                            <option value="GMT+04">GMT -4:00</option>
+                            <option value="GMT+03">GMT -3:00</option>
+                            <option value="GMT+02">GMT -2:00</option>
+                            <option value="GMT+01">GMT -1:00</option>
+                            <option value="GMT" selected="selected">GMT</option>
+                            <option value="GMT-01">GMT +1:00</option>
+                            <option value="GMT-02">GMT +2:00</option>
+                            <option value="GMT-03">GMT +3:00</option>
+                            <option value="GMT-04">GMT +4:00</option>
+                            <option value="GMT-05">GMT +5:00</option>
+                            <option value="GMT-06">GMT +6:00</option>
+                            <option value="GMT-07">GMT +7:00</option>
+                            <option value="GMT-08">GMT +8:00</option>
+                            <option value="GMT-09">GMT +9:00</option>
+                            <option value="GMT-10">GMT +10:00</option>
+                            <option value="GMT-11">GMT +11:00</option>
+                            <option value="GMT-12">GMT +12:00</option>
+                            <option value="GMT-13">GMT +13:00</option>
+                            <option value="GMT-14">GMT +14:00</option>
+                    </select>
+                </div>
+                <p class="tooltip">The timezone in which the device will be working - used for automatic date and time synchronization</p>
+                <hr>
+            </div>
+            
+        </div>
+
+        <button id="advanced_settings_button" onclick="accordion_toggle('advanced_settings')" class="accordion_button">ADVANCED SETTINGS ▼</button>
+        <div id="advanced_settings" class="hide_at_start accordion_container">
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>mDNS Hostname</p>
+                    <input type="text" value="weatherstation" id="mdns_hostname" class="setting_element">
+                </div>
+                <p class="tooltip">The name that the device should be known as on the local network. If set to e.g. "esp" the device can be accessed as "esp.local" in the browser</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>Serial Logging Verbosity</p>
+                    <select id="serial_logging_verbosity" name="serial_logging_verbosity" class="setting_element">
+                        <option value="0">None</option>
+                        <option value="1">Error</option>
+                        <option value="2">Warning</option>
+                        <option value="3">Info</option>
+                        <option value="4" selected="selected">Debug</option>
+                        <option value="5">Verbose</option>
+                    </select>
+                </div>
+                <p class="tooltip">The verbosity of the logging the device will do on the serial connection to the PC</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>WiFi RSSI test period</p>
+                    <input type="number" value="60000" min="10" max="3600000" id="wifi_rssi_test_period_ms" class="setting_element">
+                </div>
+                <p class="tooltip">The period (in milliseconds) of testing the strength of the device's WiFi connection</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>Data acquisition period</p>
+                    <input type="number" value="1000" min="5" max="3600000" id="i2c_devices_daq_interval_ms" class="setting_element">
+                </div>
+                <p class="tooltip">The period (in milliseconds) of getting the data from the device's sensors</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>Device's temperature sensor select</p>
+                    <select id="i2c_devices_daq_temp_sensor_select" name="i2c_devices_daq_temp_sensor_select" class="setting_element">
+                        <option value="0">AM2320</option>
+                        <option value="1">BMP280</option>
+                        <option value="2" selected="selected">Average of the two</option>
+                    </select>
+                </div>
+                <p class="tooltip">Which sensor should the device use for temperature measurment</p>
+                <hr>
+            </div>
+            <div class="setting_element_div">
+                <div class="sed2">
+                    <p>Data Write Interval</p>
+                    <input type="number" value="60" min="1" max="3600000" id="data_write_to_sdcard_interval" class="setting_element">
+                </div>
+                <p class="tooltip">Interval in seconds of each data write to the file</p>
+                <hr>
+            </div>
+        </div>
+
+        <button id="save_button" onclick="create_settings_file()">Create Settings File</button>
+    </div>
+</body>
+
+    <script src="./main.js"></script>
+
+</html>

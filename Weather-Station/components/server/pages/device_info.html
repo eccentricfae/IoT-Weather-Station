@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Station | Device Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #7d34b2;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        header > * {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        @media screen and (min-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        .header-button {
+            background-color: #fff;
+            color: #7d34b2;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 20px;
+            text-decoration:none;
+        }
+
+        .header-button:hover {
+            box-shadow: 0px 0px 20px yellow;
+        }
+
+        #body_title > h1{
+            text-align: center;
+            margin: auto;
+            background-color: white;
+            color: #7d34b2;
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #7d34b2;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 480px) {
+            section {
+                margin-left: -10px;
+            }
+        }
+
+        .info_div {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .info_mid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .info_card {
+            width: 300px;
+            height: 150px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #7d34b2;
+        }
+
+        .info_card > h2, p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-buttons">
+            <a class="header-button" href='./'>Home</a>
+            <a class="header-button" href='./device_info'>Device Info</a>
+            <a class="header-button" href='./settings'>Settings</a>
+        </div>
+    </header>
+
+    <section>
+        <div id="body_title">
+            <h1>Weather Station's Device Info</h1>
+        </div>
+
+        <div class="info_div">
+            <div class="info_mid">
+            <div class="info_card">
+                <h2>Signal Strength (RSSI)</h2>
+                <h2><span id="signal_rssi">Good (20)</span></h2>
+            </div>
+            <div class="info_card">
+                <h2>Device's IP</h2>
+                <h2><span id="ip_addr">000.000.000.000</span></h2>
+            </div>
+            </div>
+            <div class="info_mid">
+            <div class="info_card">
+                <h2>Local Time</h2>
+                <h2><span id="local_time">23.06.1999 09:15</span></h2>
+            </div>
+            <div class="info_card">
+                <h2>Device's Uptime</h2>
+                <h2><span id="uptime">00d 00h 00m 00s</span></h2>
+            </div>
+            <div class="info_card">
+                <h2>Set Timezone</h2>
+                <h2><span id="timezone">GMT+0</span></h2>
+            </div>
+            </div>
+            <div class="info_mid">
+            <div class="info_card">
+                <h2>mDNS Hostname</h2>
+                <h2><span id="mdns_hostname">esp</span></h2>
+            </div>
+            <div class="info_card">
+                <h2>Sensor Used For Temperature Measurment</h2>
+                <h2><span id="temp_sensor">AM2320 / BMP280 / both</span></h2>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script>

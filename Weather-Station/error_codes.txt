@@ -1,0 +1,12 @@
+code software 1 -> failed to initialize mutex for basic_settings_t in settings_types.C
+code software 2 -> failed to initialize mutex for uptime_t in Weather-Station.c
+code software 3 -> problems with reading the settings.txt file and parsing it into the user_settings (basic_setting_t)
+code software 4 -> problems with spawning the i2c task (i2c_devices_lcd_spawn_daq_task() function)
+code software 5 -> problems with settings the mdns_hostname
+code software 6 -> problems with creating the mutex for the wifi_state struct
+code software 7 -> problems with wifi_init function
+code software 8 -> problems with helpers_sync_datetime()
+code software 9 -> problems with server_init()
+code hardware 1 -> problems with sd card initialization -> esp_vfs_fat_sdspi_mount -> mounting the filesystem
+code hardware 2 -> problems with sd card initialization -> spi initialization
+code hardware 3 -> took out sd card

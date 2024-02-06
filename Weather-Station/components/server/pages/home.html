@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Station | Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #7d34b2;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        header > * {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        @media screen and (min-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        .header-button {
+            background-color: #fff;
+            color: #7d34b2;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 20px;
+            text-decoration:none;
+        }
+
+        .header-button:hover {
+            box-shadow: 0px 0px 20px yellow;
+        }
+
+        #body_title > h1{
+            text-align: center;
+            margin: auto;
+            background-color: white;
+            color: #7d34b2;
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #7d34b2;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        .weather-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .weather-card {
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #7d34b2;
+        }
+
+        .weather-card > h2, p {
+            text-align: center;
+        }
+
+        .chart_nav {
+            margin: auto;
+            margin-top: 50px;
+            background-color: #7d34b2;
+            border: 2px solid #7d34b2;
+            border-radius: 20px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        @media screen and (min-width: 480px) {
+            .chart_nav > div {
+                width: 450px;
+                display: flex;
+                flex-direction: row;
+                margin: auto;
+            }
+            .chart_nav_btn {
+                width: 150px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .chart_nav > div {
+                display: flex;
+                flex-direction: column;
+            }
+            .chart_nav_btn {
+                width: 93%;
+            }
+        }
+
+        .chart_nav > h2 {
+            color: white;
+        }
+
+        .chart_nav_btn {
+            background-color: white;
+            color: #7d34b2;
+            border: 1px solid #7d34b2;
+            border-radius: 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+            padding: 10px;
+        }
+
+        .chart_nav_btn:hover {
+            box-shadow: 0px 0px 20px yellow;
+        }
+
+        #chart_canvas {
+            margin-top: 50px;
+        }
+
+        #list_of_files > li {
+            background-color: white;
+            margin-top: 30px;
+            margin-left: calc(50% - 90px);
+        }
+
+        #list_of_files > li > a {
+            color: #7d34b2;
+            background-color: white;
+            border: 1px solid #7d34b2;
+            border-radius: 20px;
+            padding: 10px;
+            text-decoration:none;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        
+        #list_of_files > li > a:hover {
+            background-color: gray;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-buttons">
+            <a class="header-button" href='./'>Home</a>
+            <a class="header-button" href='./device_info'>Device info</a>
+            <a class="header-button" href='./settings'>Settings</a>
+        </div>
+    </header>
+
+    <section>
+        <div id="body_title">
+            <h1>Weather Station's Main Page</h1>
+        </div>
+
+        <div class="weather-info">
+            <div class="weather-card">
+                <h2>Temperature</h2>
+                <h2><span id="temp">25°C</span></h2>
+            </div>
+            <div class="weather-card">
+                <h2>Humidity</h2>
+                <h2><span id="humd">34%</span></h2>
+            </div>
+            <div class="weather-card">
+                <h2>Pressure</h2>
+                <h2><span id="pres">940.32 Pa</span></h2>
+            </div>
+        </div>
+        
+        <div class="chart_nav">
+            <h2 id="chart_main_title">Today's Charted Data</h2>
+            <div>
+                <button class="chart_nav_btn" onclick="show_temperature()">Temperature</button>
+                <button class="chart_nav_btn" onclick="show_humidity()">Humidity</button>
+                <button class="chart_nav_btn" onclick="show_pressure()">Pressure</button>
+            </div>
+        </div>
+
+        <canvas id="chart_canvas"></canvas>
+        
+        <div class="chart_nav">
+            <h2>File Download</h2>
+            <h2>Click the name of the file you wish to download!</h2>
+        </div>
+
+        <ul id="list_of_files"></ul>
+        
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+    function new_chart(x, y, x_name, y_name, min, max) {
+        let chart = new Chart("chart_canvas", {
+            type: "line",
+            data: {
+                labels: x,
+                datasets: [{
+                data: y,
+                borderColor: "blue",
+                fill: false
+                }]
+            },
+            options: {
+                legend: {display: false}, 
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: x_name
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false,
+                            suggestedMax: max,
+                            suggestedMin: min
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: y_name
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    function show_temperature() {
+        new_chart(chart_data[0], chart_data[1], "Timepoint", "Temperature [C]", Math.min(...chart_data[1]) - 3, Math.max(...chart_data[1]) + 3);
+    }
+
+    function show_humidity() {
+        new_chart(chart_data[0], chart_data[2], "Timepoint", "Humidity [%]", 0, 100);
+    }
+
+    function show_pressure() {
+        new_chart(chart_data[0], chart_data[3], "Timepoint", "Pressure [Pa]", 90000, 110000);
+    }

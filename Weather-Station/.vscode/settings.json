@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "compare": "c",
+        "cstdint": "c",
+        "cstdlib": "c",
+        "i2c_devices.h": "c",
+        "stdlib.h": "c",
+        "hd44780.h": "c",
+        "pcf8574.h": "c",
+        "helpers.h": "c",
+        "wifi.h": "c",
+        "random": "c",
+        "server.h": "c",
+        "sd_card.h": "c",
+        "any": "c",
+        "array": "c",
+        "charconv": "c",
+        "functional": "c",
+        "ratio": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "variant": "c",
+        "settings_types.h": "c"
+    }
+}
